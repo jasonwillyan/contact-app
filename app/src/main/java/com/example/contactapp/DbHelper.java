@@ -136,9 +136,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_IMAGE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_PHONE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_EMAIL)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_ADDED_TIME)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_UPDATED_TIME))
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE))
                 );
                 arrayList.add(modelContact);
             }while (cursor.moveToNext());
@@ -171,9 +169,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_IMAGE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_PHONE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_EMAIL)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_ADDED_TIME)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_UPDATED_TIME))
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE))
                 );
                 contactList.add(modelContact);
             }while (cursor.moveToNext());

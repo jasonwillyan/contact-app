@@ -44,11 +44,12 @@
             android:padding="@dimen/_10sdp"
             android:stretchColumns="2">
             <TableRow>
+
                 <TextView
-                    android:text="Phone"
+                    android:text="@string/phone_hint"
+                    android:textColor="@color/colorTextPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorTextPrimary"/>
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/phoneTv"
                     tools:text="0177000800"
@@ -60,46 +61,15 @@
                     />
             </TableRow>
             <TableRow>
+
                 <TextView
-                    android:text="Email"
+                    android:text="@string/email_hint"
+                    android:textColor="@color/colorTextPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorTextPrimary"/>
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/emailTv"
                     tools:text="jowel@gmail.com"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/colorTextSecondary"
-                    />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Added Time"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorTextPrimary"/>
-                <TextView
-                    android:id="@+id/addedTimeTv"
-                    tools:text="0177000800"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/colorTextSecondary"
-                    />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Updated Time"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorTextPrimary"/>
-                <TextView
-                    android:id="@+id/updatedTimeTv"
-                    tools:text="0177000800"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     android:padding="@dimen/_5sdp"

@@ -29,64 +29,64 @@
             android:id="@+id/nameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/white"
-            android:background="@drawable/background_input_field"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/background_input_field"
             android:drawableStart="@drawable/ic_baseline_text_fields_24"
             android:drawablePadding="@dimen/_5sdp"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/colorTextSecondary"/>
+            android:hint="@string/name_hint"
+            android:inputType="textPersonName"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/colorTextSecondary"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_14sdp" />
 
 <!--        editText for phone input-->
         <EditText
             android:id="@+id/phoneEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:textColorHint="@color/white"
-            android:background="@drawable/background_input_field"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/background_input_field"
             android:drawableStart="@drawable/ic_baseline_phone_24"
             android:drawablePadding="@dimen/_5sdp"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/colorTextSecondary"/>
+            android:hint="@string/phone_hint"
+            android:inputType="phone"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/colorTextSecondary"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_14sdp" />
 
         <!--        editText for email input-->
         <EditText
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/white"
-            android:background="@drawable/background_input_field"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/background_input_field"
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="@dimen/_5sdp"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/colorTextSecondary"/>
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/colorTextSecondary"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_14sdp" />
 
         <!--        editText for note input-->
         <EditText
             android:id="@+id/noteEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Note"
-            android:inputType="textLongMessage"
-            android:textColorHint="@color/white"
-            android:background="@drawable/background_input_field"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/background_input_field"
             android:drawableStart="@drawable/ic_baseline_note_24"
             android:drawablePadding="@dimen/_5sdp"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/colorTextSecondary"/>
+            android:hint="@string/note_hint"
+            android:inputType="textLongMessage"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/colorTextSecondary"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_14sdp" />
     </LinearLayout>
 
 

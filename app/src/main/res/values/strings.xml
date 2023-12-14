@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ContactApp</string>
+    <string name="app_name">Contatos</string>
+    <string name="name_hint">Nome</string>
+    <string name="phone_hint">Telefone</string>
+    <string name="email_hint">E-mail</string>
+    <string name="note_hint">Descrição</string>
 </resources>

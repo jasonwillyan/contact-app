@@ -33,18 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-        //init db
         dbHelper = new DbHelper(this);
 
-        //initialization
         fab = findViewById(R.id.fab);
         contactRv = findViewById(R.id.contactRv);
 
         contactRv.setHasFixedSize(true);
 
-        // add listener
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,20 +99,4 @@ public class MainActivity extends AppCompatActivity {
         adapterContact = new AdapterContact(this,dbHelper.getSearchContact(query));
         contactRv.setAdapter(adapterContact);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.deleteAllContact:
-                dbHelper.deleteAllContact();
-                onResume();
-                break;
-        }
-
-        return true;
-    }
-
-
-
 }
