@@ -40,7 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Insert Function to insert data in database
-    public long insertContact(String image,String name,String phone,String email,String note,String addedTime,String updatedTime){
+    public long insertContact(String image,String name,String phone,String email,String note,String type){
 
         //get writable database to write data on db
         SQLiteDatabase db = this.getWritableDatabase();
@@ -54,8 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(Constants.C_PHONE,phone);
         contentValues.put(Constants.C_EMAIL,email);
         contentValues.put(Constants.C_NOTE,note);
-        contentValues.put(Constants.C_ADDED_TIME,addedTime);
-        contentValues.put(Constants.C_UPDATED_TIME,updatedTime);
+        contentValues.put(Constants.C_TYPE,type);
 
         //insert data in row, It will return id of record
         long id = db.insert(Constants.TABLE_NAME,null,contentValues);
@@ -68,8 +67,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    // Update Function to update data in database
-    public void updateContact(String id,String image,String name,String phone,String email,String note,String addedTime,String updatedTime){
+    public void updateContact(String id,String image,String name,String phone,String email,String note,String type){
 
         //get writable database to write data on db
         SQLiteDatabase db = this.getWritableDatabase();
@@ -82,8 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(Constants.C_PHONE,phone);
         contentValues.put(Constants.C_EMAIL,email);
         contentValues.put(Constants.C_NOTE,note);
-        contentValues.put(Constants.C_ADDED_TIME,addedTime);
-        contentValues.put(Constants.C_UPDATED_TIME,updatedTime);
+        contentValues.put(Constants.C_TYPE,type);
 
         //update data in row, It will return id of record
         db.update(Constants.TABLE_NAME,contentValues,Constants.C_ID+" =? ",new String[]{id} );
@@ -93,7 +90,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    // delete data by id
     public void deleteContact(String id){
         //get writable database
         SQLiteDatabase db =  getWritableDatabase();
@@ -104,18 +100,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // delete all data
-    public void deleteAllContact(){
-        //get writable database
-        SQLiteDatabase db = getWritableDatabase();
-
-        //query for delete
-        db.execSQL("DELETE FROM "+Constants.TABLE_NAME);
-        db.close();
-    }
-
-
-    // get data
     public ArrayList<ModelContact> getAllData(){
         //create arrayList
         ArrayList<ModelContact> arrayList = new ArrayList<>();
@@ -136,7 +120,8 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_IMAGE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_PHONE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_EMAIL)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE))
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_TYPE))
                 );
                 arrayList.add(modelContact);
             }while (cursor.moveToNext());
@@ -169,7 +154,8 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_IMAGE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_PHONE)),
                         ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_EMAIL)),
-                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE))
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_TYPE))
                 );
                 contactList.add(modelContact);
             }while (cursor.moveToNext());

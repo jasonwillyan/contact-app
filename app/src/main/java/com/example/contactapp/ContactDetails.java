@@ -7,18 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.text.Format;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class ContactDetails extends AppCompatActivity {
 
     //view
-    private TextView nameTv,phoneTv,emailTv,addedTimeTv,updatedTimeTv,noteTv;
+    private TextView nameTv, phoneTv, emailTv, noteTv, typeTv;
     private ImageView profileIv;
 
     private String id;
@@ -43,6 +38,7 @@ public class ContactDetails extends AppCompatActivity {
         phoneTv = findViewById(R.id.phoneTv);
         emailTv = findViewById(R.id.emailTv);
         noteTv = findViewById(R.id.noteTv);
+        typeTv = findViewById(R.id.typeTv);
 
         profileIv = findViewById(R.id.profileIv);
 
@@ -64,11 +60,13 @@ public class ContactDetails extends AppCompatActivity {
                 String phone = ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_PHONE));
                 String email = ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_EMAIL));
                 String note = ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_NOTE));
+                String type = ""+cursor.getString(cursor.getColumnIndexOrThrow(Constants.C_TYPE));
 
                 nameTv.setText(name);
                 phoneTv.setText(phone);
                 emailTv.setText(email);
                 noteTv.setText(note);
+                typeTv.setText(type);
 
                 if (image.equals("null")){
                     profileIv.setImageResource(R.drawable.ic_baseline_person_24);

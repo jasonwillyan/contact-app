@@ -22,6 +22,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,33 +36,25 @@ public class AddEditContact extends AppCompatActivity {
 
     private ImageView profileIv;
     private EditText nameEt,phoneEt,emailEt,noteEt;
+    private RadioButton houseType, jobType;
     private FloatingActionButton fab;
 
-    //String variable;
-    private String id,image,name,phone,email,note,addedTime,updatedTime;
+    private String id, image, name, phone, email, note, type;
     private Boolean isEditMode;
 
-    //action bar
     private ActionBar actionBar;
 
-    //permission constant
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 200;
     private static final int IMAGE_FROM_GALLERY_CODE = 300;
     private static final int IMAGE_FROM_CAMERA_CODE = 400;
 
-    // string array of permission
     private String[] cameraPermission;
     private String[] storagePermission;
 
-    //Image uri var
     private Uri imageUri;
 
-    //database helper
     private DbHelper dbHelper;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +84,16 @@ public class AddEditContact extends AppCompatActivity {
         noteEt = findViewById(R.id.noteEt);
         fab = findViewById(R.id.fab);
 
+        houseType = findViewById(R.id.houseRb);
+        jobType = findViewById(R.id.jobRb);
+
         // get intent data
         Intent intent = getIntent();
         isEditMode = intent.getBooleanExtra("isEditMode",false);
 
         if (isEditMode){
             //set toolbar title
-            actionBar.setTitle("Update Contact");
+            actionBar.setTitle(getText(R.string.edit_contact));
 
             //get the other value from intent
             id = intent.getStringExtra("ID");
@@ -104,15 +101,24 @@ public class AddEditContact extends AppCompatActivity {
             phone = intent.getStringExtra("PHONE");
             email = intent.getStringExtra("EMAIL");
             note = intent.getStringExtra("NOTE");
-            addedTime = intent.getStringExtra("ADDEDTIME");
-            updatedTime = intent.getStringExtra("UPDATEDTIME");
             image = intent.getStringExtra("IMAGE");
+            type = intent.getStringExtra("TYPE");
 
             //set value in editText field
             nameEt.setText(name);
             phoneEt.setText(phone);
             emailEt.setText(email);
             noteEt.setText(note);
+            switch (type){
+                case "Trabalho":{
+                    jobType.setChecked(true);
+                    break;
+                }
+                default:{
+                    houseType.setChecked(true);
+                    break;
+                }
+            }
 
             imageUri = Uri.parse(image);
 
@@ -121,10 +127,8 @@ public class AddEditContact extends AppCompatActivity {
             }else {
                 profileIv.setImageURI(imageUri);
             }
-
         }else {
-            // add mode on
-            actionBar.setTitle("Add Contact");
+            actionBar.setTitle(getText(R.string.add_contact));
         }
 
         // add even handler
@@ -206,22 +210,17 @@ public class AddEditContact extends AppCompatActivity {
     }
 
     private void saveData() {
-
-        //take user giver data in variable
         name = nameEt.getText().toString();
         phone = phoneEt.getText().toString();
         email = emailEt.getText().toString();
         note = noteEt.getText().toString();
+        if(houseType.isChecked()){
+            type = "Casa";
+        }else{
+            type = "Trabalho";
+        }
 
-        // get current time to save as added time
-        String timeStamp = ""+System.currentTimeMillis();
-
-
-        //check filed data
         if (!name.isEmpty() || !phone.isEmpty() || !email.isEmpty() || !note.isEmpty()){
-            //save data ,if user have only one data
-
-            //check edit or add mode to save data in sql
             if (isEditMode){
                 // edit mode
                  dbHelper.updateContact(
@@ -231,44 +230,32 @@ public class AddEditContact extends AppCompatActivity {
                         ""+phone,
                         ""+email,
                         ""+note,
-                        ""+addedTime,
-                         ""+timeStamp // updated time will new time
+                        ""+type
                 );
 
-                Toast.makeText(getApplicationContext(), "Updated Successfully....", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), getText(R.string.updated_success), Toast.LENGTH_SHORT).show();
             }else {
-                // add mode
                 long id =  dbHelper.insertContact(
                         ""+imageUri,
                         ""+name,
                         ""+phone,
                         ""+email,
                         ""+note,
-                        ""+timeStamp,
-                        ""+timeStamp
+                        ""+type
                 );
-                //To check insert data successfully ,show a toast message
-                Toast.makeText(getApplicationContext(), "Inserted Successfully.... "+id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getText(R.string.insert_success), Toast.LENGTH_SHORT).show();
             }
-
         }else {
-            // show toast message
-            Toast.makeText(getApplicationContext(), "Nothing to save....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getText(R.string.nothing_to_save), Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    //ctr + O
-
-    //back button click
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
 
-    //check camera permission
     private boolean checkCameraPermission(){
         boolean result = ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
         boolean result1 = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
@@ -276,25 +263,21 @@ public class AddEditContact extends AppCompatActivity {
         return result & result1;
     }
 
-    //request for camera permission
     private void requestCameraPermission(){
         ActivityCompat.requestPermissions(this,cameraPermission,CAMERA_PERMISSION_CODE); // handle request permission on override method
     }
 
-    //check storage permission
     private boolean checkStoragePermission(){
         boolean result1 = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
 
         return result1;
     }
 
-    //request for camera permission
     private void requestStoragePermission(){
         ActivityCompat.requestPermissions(this,storagePermission,STORAGE_PERMISSION_CODE);
     }
 
 
-    //handle request permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -303,15 +286,12 @@ public class AddEditContact extends AppCompatActivity {
             case CAMERA_PERMISSION_CODE:
                 if (grantResults.length >0){
 
-                    //if all permission allowed return true , otherwise false
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
                     if (cameraAccepted && storageAccepted){
-                        //both permission granted
                         pickFromCamera();
                     }else {
-                        //permission not granted
                         Toast.makeText(getApplicationContext(), "Camera & Storage Permission needed..", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -319,21 +299,15 @@ public class AddEditContact extends AppCompatActivity {
 
             case STORAGE_PERMISSION_CODE:
                 if (grantResults.length >0){
-
-                    //if all permission allowed return true , otherwise false
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-
                     if (storageAccepted){
-                        //permission granted
                         pickFromGallery();
                     }else {
-                        //permission not granted
                         Toast.makeText(getApplicationContext(), "Storage Permission needed..", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
         }
-
     }
 
     @Override
@@ -341,48 +315,24 @@ public class AddEditContact extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
             if (requestCode == IMAGE_FROM_GALLERY_CODE){
-                // picked image from gallery
-                //crop image
                 CropImage.activity(data.getData())
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setAspectRatio(1,1)
                         .start(AddEditContact.this);
 
             }else if (requestCode == IMAGE_FROM_CAMERA_CODE){
-                //picked image from camera
-                //crop Image
                 CropImage.activity(imageUri)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setAspectRatio(1,1)
                         .start(AddEditContact.this);
             }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-
-                //cropped image received
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 imageUri = result.getUri();
                 profileIv.setImageURI(imageUri);
-
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                //for error handling
                 Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    // create view object in java file
-    // Profile image taking with user permission and crop functionality
-    // first permission from manifest,check,request permission
-    // by clicking profileIv open dialog to choose image
-    // pickImage and save in ImageUri variable
-    // create activity for crop image in manifest file
-    // next tutorial we create SQLite database and Add data.
-    // create a class called "Constants" for database and table filed title
-    // now insert data in database from AddEditContact Class
-    // now run application , we done for our insert function
-
-
-
-
-
 }

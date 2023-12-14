@@ -54,6 +54,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactV
         String phone= modelContact.getPhone();
         String email = modelContact.getEmail();
         String note = modelContact.getNote();
+        String type = modelContact.getType();
 
         //set data in view
         holder.contactName.setText(name);
@@ -79,7 +80,6 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactV
                 Intent intent = new Intent(context,ContactDetails.class);
                 intent.putExtra("contactId",id);
                 context.startActivity(intent); // now get data from details Activity
-                Toast.makeText(context, "Heelo", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,7 +96,8 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactV
                 intent.putExtra("EMAIL",email);
                 intent.putExtra("NOTE",note);
                 intent.putExtra("IMAGE",image);
-
+                intent.putExtra("TYPE",type);
+                
                 // pass a boolean data to define it is for edit purpose
                 intent.putExtra("isEditMode",true);
 

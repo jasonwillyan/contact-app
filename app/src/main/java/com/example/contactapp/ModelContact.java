@@ -2,20 +2,19 @@ package com.example.contactapp;
 
 public class ModelContact {
 
-    private String id,name,image,phone,email,note;
+    private String id, name, image, phone, email, note, type;
 
-    // create constructor
 
-    public ModelContact(String id, String name, String image, String phone, String email, String note) {
+    public ModelContact(String id, String name, String image, String phone, String email, String note, String type) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.phone = phone;
         this.email = email;
         this.note = note;
+        this.type = type;
     }
 
-    // create getter and setter method
 
     public String getId() {
         return id;
@@ -63,5 +62,13 @@ public class ModelContact {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String note) {
+        this.type = type;
     }
 }

@@ -4,4 +4,12 @@
     <string name="phone_hint">Telefone</string>
     <string name="email_hint">E-mail</string>
     <string name="note_hint">Descrição</string>
+    <string name="type_label">Tipo</string>
+    <string name="house_type">Casa</string>
+    <string name="job_type">Trabalho</string>
+    <string name="add_contact">Adicionar Contato</string>
+    <string name="edit_contact">Editar Contato</string>
+    <string name="insert_success">Inserido com sucesso!</string>
+    <string name="nothing_to_save">Nada para salvar.</string>
+    <string name="updated_success">Atualizado com sucesso!</string>
 </resources>

@@ -87,6 +87,38 @@
             android:textColor="@color/colorTextSecondary"
             android:textColorHint="@color/white"
             android:textSize="@dimen/_14sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/type_label" />
+
+            <RadioGroup
+                android:id="@+id/typeRg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/houseRb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/house_type" />
+
+                <RadioButton
+                    android:id="@+id/jobRb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_type" />
+            </RadioGroup>
+        </LinearLayout>
+
     </LinearLayout>
 
 
