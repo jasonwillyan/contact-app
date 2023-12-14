@@ -97,7 +97,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactV
                 intent.putExtra("NOTE",note);
                 intent.putExtra("IMAGE",image);
                 intent.putExtra("TYPE",type);
-                
+
                 // pass a boolean data to define it is for edit purpose
                 intent.putExtra("isEditMode",true);
 
@@ -112,12 +112,9 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactV
         holder.contactDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // we need database helper class reference
                 dbHelper.deleteContact(id);
 
-                //refresh data by calling resume state of MainActivity
                 ((MainActivity)context).onResume();
-
             }
         });
 

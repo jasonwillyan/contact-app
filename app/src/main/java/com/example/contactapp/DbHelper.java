@@ -91,14 +91,13 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void deleteContact(String id){
-        //get writable database
-        SQLiteDatabase db =  getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
 
-        //delete query
-        db.delete(Constants.TABLE_NAME,"WHERE"+" =? ",new String[]{id});
+        db.delete(Constants.TABLE_NAME, Constants.C_ID + " =? ", new String[]{id});
 
         db.close();
     }
+
 
     public ArrayList<ModelContact> getAllData(){
         //create arrayList
